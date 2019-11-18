@@ -1,0 +1,9 @@
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\bin\Debug\netcoreapp2.1\Day1.DAL.deps.json
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\bin\Debug\netcoreapp2.1\Day1.DAL.dll
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.csproj.CoreCompileInputs.cache
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.AssemblyInfoInputs.cache
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.AssemblyInfo.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\bin\Debug\netcoreapp2.1\Day1.DAL.pdb
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.dll
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.pdb
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.DAL\obj\Debug\netcoreapp2.1\Day1.DAL.csprojAssemblyReference.cache

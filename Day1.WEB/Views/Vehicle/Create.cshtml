@@ -1,0 +1,19 @@
+﻿@model Day1.BLL.DTObjects.VehicleDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Добавление нового ТС</h2>
+
+<form method="post" action="~/Vehicle/Create">
+    <div class="form-group">
+        <input type="text" asp-for="Name" required class="form-control" placeholder="Введите название ТС" />
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="CreateDate" required class="form-control" placeholder="Введите дату создания ТС" />
+    </div>
+    <div class="form-group">
+        <input asp-for="GovernmentNumber" type="text" required class="form-control" placeholder="Введите Гос. Номер ТС" />
+    </div>
+    <input type="submit" value="Добавить" />
+</form>

@@ -1,0 +1,1 @@
+﻿insert into dbo.Companies values('0','Company1', '2010-01-01', 'Creator')
