@@ -9,6 +9,7 @@ namespace Day1.DAL.Entities
         public int Id { get; set; }
         public State State { get; set; } = 0;
     }
+
     public enum State
     {
         Active = 0,

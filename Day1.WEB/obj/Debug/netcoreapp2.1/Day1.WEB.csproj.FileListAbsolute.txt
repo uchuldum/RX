@@ -38,3 +38,8 @@ C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\
 C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
 C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Vehicle\Index.g.cshtml.cs
 C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Vehicle\Create.g.cshtml.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Brand\Create.g.cshtml.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Brand\Index.g.cshtml.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Model\Create.g.cshtml.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Model\Index.g.cshtml.cs
+C:\Users\sokolov\Desktop\Uran\Day1\Day1.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Vehicle\Edit.g.cshtml.cs

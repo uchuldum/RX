@@ -7,6 +7,7 @@ using Day1.BLL.DTObjects;
 using System.Threading.Tasks;
 using Day1.DAL.Interfaces;
 using Day1.DAL.Entities;
+using Day1.BLL.SearchModels;
 using System.Linq;
 
 namespace Day1.BLL.Services
@@ -22,48 +23,68 @@ namespace Day1.BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<VehicleDTO> Get(int id, UserDTO user)
+        public async Task<VehicleDTO> Get(int id)
         {
-            if (user.Name == null) return null;
-            return mapper.Map<VehicleDTO>(database.VehicleRepository.Find(x => x.Id == id && x.Creator.UserName == user.Name));
+            return mapper.Map<VehicleDTO>(await database.VehicleRepository.Get(id));
         }
 
         public async Task<IEnumerable<VehicleDTO>> GetAll(UserDTO user)
         {
             if (user.Name == null) return Enumerable.Empty<VehicleDTO>();
-            return mapper.Map<IEnumerable<VehicleDTO>>(database.VehicleRepository.Find(x => x.Creator.UserName == user.Name));
+            var all = await database.VehicleRepository.GetAllWithBrandAndModel();
+            return mapper.Map<IEnumerable<VehicleDTO>>(all.Where(x => x.CreatorId == database.EmployeeRepository.GetByName(user.Name) && x.State == State.Active));
         }
 
-        public Task<IEnumerable<VehicleDTO>> GetVehicleDTOs(string model, string brand, string name, DateTime dateBefore, DateTime dateFrom, UserDTO user)
+        public async Task<IEnumerable<VehicleDTO>> GetVehicleDTOs(VehicleSearchModel searchModel, UserDTO user)
         {
+            var result = await database.VehicleRepository.GetAllWithBrandAndModel();
             if (user.Name == null) return null;
-            throw new NotImplementedException();
+            result = result.AsQueryable();
+            result = result.Where(x => x.CreatorId == database.EmployeeRepository.GetByName(user.Name));
+            if (searchModel != null)
+            {
+                if (!string.IsNullOrEmpty(searchModel.Name))
+                {
+                    //if(int.TryParse(searchModel.Name))
+                    result = result.Where(x => x.Name.StartsWith(searchModel.Name));
+                }
+                if(searchModel.ModelId.HasValue)
+                    result = result.Where(x => x.ModelId == searchModel.ModelId);
+                if (searchModel.BrandId.HasValue)
+                    result = result.Where(x => x.BrandId == searchModel.BrandId);
+                if (searchModel.BeforeDate != null)
+                    result = result.Where(x => x.CreateDate < searchModel.BeforeDate);
+                if (searchModel.FromDate != null)
+                    result = result.Where(x => x.CreateDate > searchModel.FromDate);
+            }
+
+            return mapper.Map<IEnumerable<VehicleDTO>>(result);
         }
 
-        public Task Add(VehicleDTO entity, UserDTO user)
+        public async Task<VehicleDTO> Add(VehicleDTO entity, UserDTO user)
         {
             if (user.Name == null) return null;
-            entity.CreateId = database.EmployeeRepository.GetByName(user.Name);
+            entity.CreatorId = database.EmployeeRepository.GetByName(user.Name);
             database.VehicleRepository.Add(mapper.Map<Vehicle>(entity));
-            database.Save();
-            return Task.CompletedTask;
+            await database.Save();
+            return new VehicleDTO { };
         }
 
-        public void Remove(VehicleDTO entity, UserDTO user)
+        public async Task Remove(int id, UserDTO user)
         {
             if (user.Name == null) return;
-            entity.CreateId = database.EmployeeRepository.GetByName(user.Name);
-            var vehicle = mapper.Map<Vehicle>(entity);
-            vehicle.State = State.Remote;
-            database.VehicleRepository.Update(vehicle);
-            database.Save();
+            var model = await database.VehicleRepository.Get(id);
+            model.State = State.Remote;
+            database.VehicleRepository.Update(model);
+            await database.Save();
         }
 
-        public void Update(VehicleDTO entity, UserDTO user)
+        public async Task Update(VehicleDTO entity, UserDTO user)
         {
             if (user.Name == null) return;
+            entity.CreatorId = database.EmployeeRepository.GetByName(user.Name);
             database.VehicleRepository.Update(mapper.Map<Vehicle>(entity));
-            database.Save();
+            await database.Save();
         }
     }
 }

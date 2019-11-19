@@ -10,8 +10,10 @@ namespace Day1.BLL.DTObjects
         public string Name { get; set; }
         public string GovernmentNumber { get; set; }
         public DateTime CreateDate { get; set; }
-        public string CreateId { get; set; }
-        public string CarBrand { get; set; }
-        public string CarModel { get; set; }
+        public string CreatorId { get; set; }
+        public int ModelId  { get; set; }
+        public int BrandId { get; set; }
+        public string BrandName { get; set; }
+        public string ModelName { get; set; }
     }
 }

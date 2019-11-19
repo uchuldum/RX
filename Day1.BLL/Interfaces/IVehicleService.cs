@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Day1.BLL.DTObjects;
+using Day1.BLL.SearchModels;
+
 namespace Day1.BLL.Interfaces
 {
     public interface IVehicleService : IService<VehicleDTO>
     {
-        Task<IEnumerable<VehicleDTO>> GetVehicleDTOs(string model, string brand, string name, DateTime dateBefore, DateTime dateFrom, UserDTO user);
+        Task<IEnumerable<VehicleDTO>> GetVehicleDTOs(VehicleSearchModel vehicleSearchModel, UserDTO user);
     }
 }

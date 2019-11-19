@@ -1,0 +1,32 @@
+﻿@model Day1.BLL.DTObjects.VehicleDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Редактирование ТС</h2>
+
+<form method="post" action="Create">
+    <div hidden class="form-group">
+        <input type="text" asp-for="Id"  class="form-control" placeholder="Введите название ТС" value="@ViewData["Id"]" />
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Name" required class="form-control" placeholder="Введите название ТС" value="@ViewData["Name"]" />
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="CreateDate" required class="form-control" placeholder="Введите дату создания ТС" value="@ViewData["CreateDate"]" />
+    </div>
+    <div class="form-group">
+        <input asp-for="GovernmentNumber" type="text" required class="form-control" placeholder="Введите Гос. Номер ТС" value="@ViewData["GovernmentNumber"]" />
+    </div>
+    <div class="form-group">
+        <select asp-for="ModelId" class="form-control" asp-items="ViewBag.Models">
+            <option>Выберите марку</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands">
+            <option>Выберите модель</option>
+        </select>
+    </div>
+    <input type="submit" value="Изменить" />
+</form>

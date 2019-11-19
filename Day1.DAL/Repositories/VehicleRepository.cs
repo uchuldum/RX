@@ -19,29 +19,14 @@ namespace Day1.DAL.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<Vehicle>> GetByBrand(string brand)
+        public async Task<IEnumerable<Vehicle>> GetAllWithBrandAndModel()
         {
-            return await context.Vehicles.Where(v => v.Brand.Name == brand).ToListAsync();
+            return await context.Vehicles.Include(x => x.Brand).Include(x => x.Model).ToListAsync();
         }
 
-        public async Task<IEnumerable<Vehicle>> GetByDateBefore(DateTime date)
+        public Task<IEnumerable<Vehicle>> GetByCondition()
         {
-            return await context.Vehicles.Where(v => v.CreateDate < date).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Vehicle>> GetByDateFrom(DateTime date)
-        {
-            return await context.Vehicles.Where(v => v.CreateDate > date).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Vehicle>> GetByModel(string model)
-        {
-            return await context.Vehicles.Where(v => v.Model.Name == model).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Vehicle>> GetByName(string name)
-        {
-            return await context.Vehicles.Where(v => v.Name == name).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }

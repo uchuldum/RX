@@ -8,10 +8,7 @@ namespace Day1.DAL.Interfaces
 {
     public interface IVehicleRepository : IRepository<Vehicle>
     {
-        Task<IEnumerable<Vehicle>> GetByBrand(string brand);
-        Task<IEnumerable<Vehicle>> GetByModel(string model);
-        Task<IEnumerable<Vehicle>> GetByName(string name);
-        Task<IEnumerable<Vehicle>> GetByDateFrom(DateTime date);
-        Task<IEnumerable<Vehicle>> GetByDateBefore(DateTime date);
+        Task<IEnumerable<Vehicle>> GetAllWithBrandAndModel();
+        Task<IEnumerable<Vehicle>> GetByCondition();
     }
 }

@@ -7,6 +7,7 @@ using Day1.BLL.DTObjects;
 using System.Threading.Tasks;
 using Day1.DAL.Interfaces;
 using Day1.DAL.Entities;
+using System.Linq;
 
 namespace Day1.BLL.Services
 {
@@ -21,19 +22,25 @@ namespace Day1.BLL.Services
             this.mapper = mapper;
         }
 
-        public Task Add(BrandDTO entity, UserDTO user)
+        public async Task<BrandDTO> Add(BrandDTO entity, UserDTO user)
         {
-            throw new NotImplementedException();
+            if (user.Name == null) return null;
+            entity.CreatorId = database.EmployeeRepository.GetByName(user.Name);
+            database.BrandRepository.Add(mapper.Map<Brand>(entity));
+            await database.Save();
+            return new BrandDTO { };
         }
 
-        public Task<BrandDTO> Get(int id, UserDTO user)
+        public async Task<BrandDTO> Get(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<BrandDTO>(await database.BrandRepository.Get(id));
         }
 
-        public Task<IEnumerable<BrandDTO>> GetAll(UserDTO user)
+        public async Task<IEnumerable<BrandDTO>> GetAll(UserDTO user)
         {
-            throw new NotImplementedException();
+            if (user.Name == null) return Enumerable.Empty<BrandDTO>();
+            var all = await database.BrandRepository.GetAll();
+            return mapper.Map<IEnumerable<BrandDTO>>(all.Where(x => x.CreatorId == database.EmployeeRepository.GetByName(user.Name) && x.State == State.Active));
         }
 
         public Task<IEnumerable<BrandDTO>> GetModelDTOs(string name, DateTime dateBefore, DateTime dateFrom, UserDTO user)
@@ -41,14 +48,20 @@ namespace Day1.BLL.Services
             throw new NotImplementedException();
         }
 
-        public void Remove(BrandDTO entity, UserDTO user)
+        public async Task Remove(int id, UserDTO user)
         {
-            throw new NotImplementedException();
+            if (user.Name == null) return;
+            var model = await database.BrandRepository.Get(id);
+            model.State = State.Remote;
+            database.BrandRepository.Update(model);
+            await database.Save();
         }
 
-        public void Update(BrandDTO entity, UserDTO user)
+        public async Task Update(BrandDTO entity, UserDTO user)
         {
-            throw new NotImplementedException();
+            if (user.Name == null) return;
+            database.BrandRepository.Update(mapper.Map<Brand>(entity));
+            database.Save();
         }
     }
 }

@@ -8,11 +8,11 @@ namespace Day1.BLL.Interfaces
 {
     public interface IService<TEntity> where TEntity : class
     {
-        Task Add(TEntity entity, UserDTO user);
-        void Remove(TEntity entity, UserDTO user);
-        void Update(TEntity entity, UserDTO user);
+        Task<TEntity> Add(TEntity entity, UserDTO user);
+        Task Remove(int id, UserDTO user);
+        Task Update(TEntity entity, UserDTO user);
 
         Task<IEnumerable<TEntity>> GetAll(UserDTO user);
-        Task<TEntity> Get(int id, UserDTO user);
+        Task<TEntity> Get(int id);
     }
 }

@@ -3,7 +3,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<form method="post" action="~/Vehicle/Search">
+    <div class="form-group">
+        <input name="name" type="text" class="form-control" placeholder="Введите название ТС" />
+    </div>
+    <div class="form-group">
+        <input name="beforeDate" type="date"  class="form-control" placeholder="Дата создания ДО" />
+    </div>
+    <div class="form-group">
+        <input name="fromDate" type="date"  class="form-control" placeholder="Дата создания ОТ" />
+    </div>
+    <div class="form-group">
+        <select name="modelId" class="form-control" asp-items="ViewBag.Models">
+            <option>Выберите марку</option>
+        </select>
+    </div>
+    <div  class="form-group">
+        <select name = "brandId" class="form-control" asp-items="ViewBag.Brands">
+            <option>Выберите модель</option>
+        </select>
+    </div>
+    <input type="submit" value="Поиск" />
+</form>
+
 
 <a asp-action="Create"><h3>Добавить ТС</h3></a>
 <table class="table">
@@ -19,7 +41,10 @@
                 @Html.DisplayNameFor(model => model.CreateDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateId)
+                @Html.DisplayNameFor(model => model.ModelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
             </th>
         </tr>
     </thead>
@@ -37,7 +62,10 @@
                     @Html.DisplayFor(modelItem => item.CreateDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateId)
+                    @Html.DisplayFor(modelItem => item.ModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -47,3 +75,5 @@
         }
     </tbody>
 </table>
+
+

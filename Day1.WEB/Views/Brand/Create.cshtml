@@ -1,0 +1,16 @@
+﻿@model Day1.BLL.DTObjects.BrandDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Добавление новой модели</h2>
+
+<form method="post" action="Create">
+    <div class="form-group">
+        <input type="text" asp-for="Name" required class="form-control" placeholder="Введите название модели" />
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="CreateDate" required class="form-control" placeholder="Введите дату создания модели" />
+    </div>
+    <input type="submit" value="Добавить" />
+</form>

@@ -1,21 +1,21 @@
 ﻿
 @if (User.Identity.IsAuthenticated)
 {
-    <p>@User.Identity.Name</p>
+    
 
     <div class="row">
         <div class="col-md-8">
-            <a asp-controller="Vehicle" asp-action="Index">ТС</a>
-            <a asp-controller="Account" asp-action="Login">Марки</a>
-            <a asp-controller="Account" asp-action="Login">Модели</a>
+            <h4>Вы вошли как: @User.Identity.Name</h4>
         </div>
-        <form class="col-md-4" method="post" asp-controller="Account" asp-action="LogOff">
-            <input type="submit" value="Выход" />
-        </form>
+        <div class="col-md-4">
+            <form method="post" asp-controller="Account" asp-action="LogOff">
+                <input type="submit" value="Выход" />
+            </form>
+        </div>
     </div>
 }
 else
 {
-    <a asp-controller="Account" asp-action="Login">Вход</a>
-    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    <button class="btn btn-default"  onclick="location.href='@Url.Action("Login", "Account")'" >Вход</button>
+    <button class="btn btn-default" onclick="location.href='@Url.Action("Register", "Account")'">Регистрация</button>
 }

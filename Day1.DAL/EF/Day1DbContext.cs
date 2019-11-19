@@ -16,7 +16,7 @@ namespace Day1.DAL.EF
         public Day1DbContext(DbContextOptions<Day1DbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            
         }
 
         public virtual DbSet<Vehicle> Vehicles { get; set; }
